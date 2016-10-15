@@ -4,9 +4,6 @@ public class Kadai4_3 {
 	public static void main(String[] args){
 		Kadai4_3_DAO Kadai4_3_DAO = new Kadai4_3_DAO();
 
-
-
-
 //		本テーブルのデータ表示
 		List<TableValue> bookArrayList = Kadai4_3_DAO.findBook();
 		System.out.println("■本テーブルのデータ");
