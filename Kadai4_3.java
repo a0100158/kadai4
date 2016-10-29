@@ -1,57 +1,59 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 
 public class Kadai4_3 {
-	public static void main(String[] args){
+	public static void main(String[] args) throws IOException{
 		Kadai4_3_DAO Kadai4_3_DAO = new Kadai4_3_DAO();
-		List valueList = Kadai4_3_DAO.find();
-		List bookList = (List) valueList.get(0);
-		List libraryList = (List) valueList.get(1);
-		List peggingList = (List) valueList.get(2);
 
-		//		本テーブルのデータ表示
-		List al1 = new ArrayList();
-		for(Object ob : bookList){
-			al1.add(ob);
-		}
-		System.out.println("■本テーブルのデータ");
-		for(Object ob : al1){
-			System.out.print(((Book) ob).getId() + "  ");
-			System.out.print(((Book) ob).getGenre() + "  ");
-			System.out.print(((Book) ob).getTitle() + "  ");
-			System.out.print(((Book) ob).getPrice() + "  ");
-			System.out.print(((Book) ob).getAuthor() + "  ");
-			System.out.print(((Book) ob).getPublisher() + "  ");
-			System.out.print(((Book) ob).getEntry_date() + "  ");
-			System.out.println(((Book) ob).getUpdate_date() + "  ");
-		}
+		InputStreamReader is = new InputStreamReader(System.in);
+		BufferedReader br = new BufferedReader(is);
 
+		//		本テーブルの値入力
+		System.out.println("■本テーブルのデータを追加します。");
+		System.out.println();
+		System.out.println("①ジャンルを入力してください。");
+		String srtInputBook1 = br.readLine();
+		System.out.println("②タイトルを入力してください。");
+		String srtInputBook2 = br.readLine();
+		System.out.println("③価格を数値で入力してください。");
+		String srtInputBook3 = br.readLine();
+		int intInputBook3 = Integer.parseInt(srtInputBook3);
+		System.out.println("④著者を入力してください。");
+		String strInputBook4 = br.readLine();
+		System.out.println("⑤出版社を入力してください。");
+		String strInputBook5 = br.readLine();
+		java.util.Date date = new java.util.Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String srtInputBook6 = sdf.format(date);
+		Kadai4_3_DAO.setBook(srtInputBook1,srtInputBook2,intInputBook3,strInputBook4,strInputBook5,srtInputBook6);
+		System.out.println();
 		System.out.println();
 
+		//		図書館テーブルの値入力
+		System.out.println("■図書館テーブルのデータを追加します。");
+		System.out.println();
+		System.out.println("図書館名を入力してください。");
+		String srtInputLibrary6 = br.readLine();
 
-		//		図書館テーブルのデータ表示
-		List al2 = new ArrayList();
-		for(Object ob : libraryList){
-			al2.add(ob);
-		}
-		System.out.println("■図書館テーブルのデータ");
-		for(Object ob : al2){
-			System.out.print(((Library) ob).getLibrary_id() + "  ");
-			System.out.println(((Library) ob).getLibrary_name() + "  ");
-		}
-
+		Kadai4_3_DAO.setLibrary(srtInputLibrary6);
+		System.out.println();
 		System.out.println();
 
-		//		図書館と本のひも付きテーブルのデータ表示
-		List al3 = new ArrayList();
-		for(Object ob : peggingList){
-			al3.add(ob);
-		}
-		System.out.println("■図書館と本のひも付きテーブルのデータ");
-		for(Object ob : al3){
-			System.out.print(((Pegging) ob).getPegging_id() + "  ");
-			System.out.print(((Pegging) ob).getLibrary_id() + "  ");
-			System.out.println(((Pegging) ob).getId_pegging());
-		}
+		//		図書館と本のひも付きテーブルの値入力
+		System.out.println("■図書館と本のひも付きテーブルのデータを追加します。");
+		System.out.println();
+		System.out.println("①図書館idを数値で入力してください。");
+		String strInputPegging1 = br.readLine();
+		int intInputPegging1 = Integer.parseInt(strInputPegging1);
+		System.out.println("②本のidを数値で入力してください。");
+		String strInputPegging2 = br.readLine();
+		int intInputPegging2 = Integer.parseInt(strInputPegging2);
+
+		Kadai4_3_DAO.setPegging(intInputPegging1,intInputPegging2);
+
+
+		Kadai4_3_DAO.find();
 	}
 }
