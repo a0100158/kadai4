@@ -19,7 +19,6 @@ public class Kadai4_6 {
 		choice(srtOneInput);
 	}
 
-
 	private static void choice(String srtOneInput) throws IOException {
 		Kadai4_6_DAO Kadai4_6_DAO = new Kadai4_6_DAO();
 		InputStreamReader is = new InputStreamReader(System.in);
@@ -30,68 +29,23 @@ public class Kadai4_6 {
 
 			System.out.println("検索する本のタイトルを入力してください。");
 			String srtBookTitle = br.readLine();
-			//			List valueList = Kadai4_6_DAO.find();
-			List valueList = Kadai4_6_DAO.find(srtBookTitle);
-			//			List bookList = (List) valueList.get(0);
-			//			List libraryList = (List) valueList.get(1);
-			//			List peggingList = (List) valueList.get(2);
-			List libraryFindList = (List) valueList.get(3);
-
-
-			//			//		本テーブルのデータ表示
-			//			List bookAL = new ArrayList();
-			//			for(Object ob : bookList){
-			//				bookAL.add(ob);
-			//			}
-
-			//		本がある置いてある図書館表示
-			List libraryFindAL = new ArrayList();
-			for(Object ob : libraryFindList){
-				libraryFindAL.add(ob);
+			if(srtBookTitle == null || srtBookTitle.length() == 0){
+				System.out.println("未入力です。検索条件を入力してください。");
+				break;
+			}else{
+				List valueList = Kadai4_6_DAO.find(srtBookTitle);
+				List libraryFindList = (List) valueList.get(3);
+				//		本がある置いてある図書館表示
+				List libraryFindAL = new ArrayList();
+				for(Object ob : libraryFindList){
+					libraryFindAL.add(ob);
+				}
+				System.out.println(srtBookTitle + "は、以下の図書館にあります。");
+				for(Object ob : libraryFindAL){
+					System.out.print(((Library) ob).getLibrary_name() + "  ");
+				}
+				break;
 			}
-			//			System.out.println("■本テーブルのデータ");
-			System.out.println(srtBookTitle + "は、以下の図書館にあります。");
-			for(Object ob : libraryFindAL){
-				//				System.out.print(((Book) ob).getTitle() + "  ");
-				System.out.print(((Library) ob).getLibrary_name() + "  ");
-				//				System.out.print(((Book) ob).getId() + "  ");
-				//				System.out.print(((Book) ob).getGenre() + "  ");
-				//				System.out.print(((Book) ob).getTitle() + "  ");
-				//				System.out.print(((Book) ob).getPrice() + "  ");
-				//				System.out.print(((Book) ob).getAuthor() + "  ");
-				//				System.out.print(((Book) ob).getPublisher() + "  ");
-				//				System.out.print(((Book) ob).getEntry_date() + "  ");
-				//				System.out.println(((Book) ob).getUpdate_date() + "  ");
-			}
-
-			//			System.out.println();
-			//
-			//			//		図書館テーブルのデータ表示
-			//			List libraryAL = new ArrayList();
-			//			for(Object ob : libraryList){
-			//				libraryAL.add(ob);
-			//			}
-			//			System.out.println("■図書館テーブルのデータ");
-			//			for(Object ob : libraryAL){
-			//				System.out.print(((Library) ob).getLibrary_id() + "  ");
-			//				System.out.println(((Library) ob).getLibrary_name() + "  ");
-			//			}
-			//
-			//			System.out.println();
-			//
-			//			//		図書館と本のひも付きテーブルのデータ表示
-			//			List peggingAL = new ArrayList();
-			//			for(Object ob : peggingList){
-			//				peggingAL.add(ob);
-			//			}
-			//			System.out.println("■図書館と本のひも付きテーブルのデータ");
-			//			for(Object ob : peggingAL){
-			//				System.out.print(((Pegging) ob).getPegging_id() + "  ");
-			//				System.out.print(((Pegging) ob).getLibrary_id() + "  ");
-			//				System.out.println(((Pegging) ob).getId_pegging());
-			//			}
-			break;
-
 		case "insert" :
 			//本テーブルの値入力
 			System.out.println("■本テーブルのデータを追加します。");

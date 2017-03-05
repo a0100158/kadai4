@@ -130,8 +130,6 @@ public class Kadai4_6_DAO {
 		peggingStatement.executeUpdate();
 	}
 
-
-	//	public List find(){
 	public List find(String srtBookTitle){
 		Connection con = null;
 		List listStore = new ArrayList();
@@ -166,14 +164,12 @@ public class Kadai4_6_DAO {
 
 	//		本テーブル値取得
 	List bookSelect() throws SQLException{
-		//	List bookSelect(String srtBookTitle) throws SQLException{
 		List bookArrayList = new ArrayList();
 		Connection con = null;
 		con = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
 		//		本テーブルのSQL
 		String bookSql = "select * from book";
-		//		String bookSql = "select id from book where title = '" + srtBookTitle + "'";
-		java.sql.PreparedStatement bookStatement =con.prepareStatement(bookSql);
+		PreparedStatement bookStatement =con.prepareStatement(bookSql);
 		ResultSet bookresult = bookStatement.executeQuery();
 		while(bookresult.next()){
 			int id = bookresult.getInt(1);
@@ -197,7 +193,7 @@ public class Kadai4_6_DAO {
 		con = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
 		//		図書館テーブルのSQL
 		String librarySql = "select * from library";
-		java.sql.PreparedStatement libraryStatement =con.prepareStatement(librarySql);
+		PreparedStatement libraryStatement =con.prepareStatement(librarySql);
 		ResultSet libraryresult = libraryStatement.executeQuery();
 		while(libraryresult.next()){
 			int library_id = libraryresult.getInt(1);
@@ -215,7 +211,7 @@ public class Kadai4_6_DAO {
 		con = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
 		//		図書館と本のひも付きテーブルのSQL
 		String peggingSql = "select * from pegging";
-		java.sql.PreparedStatement peggingStatement =con.prepareStatement(peggingSql);
+		PreparedStatement peggingStatement =con.prepareStatement(peggingSql);
 		ResultSet peggingresult = peggingStatement.executeQuery();
 		while(peggingresult.next()){
 			int pegging_id = peggingresult.getInt(1);
@@ -227,17 +223,16 @@ public class Kadai4_6_DAO {
 		return peggingArrayList;
 	}
 
-
-	//本のタイトルに紐づいた図書館を返す
-	//	List bookSelect() throws SQLException{
 	List libraryFindSelect(String srtBookTitle) throws SQLException{
 		List libraryFindList = new ArrayList();
 		Connection con = null;
 		con = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
 		//		値を取得するSQL
-		String libraryFindSql = "select library_id,library_name from library where library_id in(select library_id from pegging where id in(select id from book where title =  '" + srtBookTitle + "'))" ;
-		//		String bookSql = "select id from book where title = '" + srtBookTitle + "'";
-		java.sql.PreparedStatement libraryFindStatement =con.prepareStatement(libraryFindSql);
+		String libraryFindSql = "select l.library_id,l.library_name from library l,book b,pegging p where l.library_id = p.library_id and p.id = b.id and b.title = ?" ;
+		PreparedStatement libraryFindStatement =con.prepareStatement(libraryFindSql);
+
+		libraryFindStatement.setString(1,srtBookTitle);
+
 		ResultSet libraryFindresult = libraryFindStatement.executeQuery();
 		while(libraryFindresult.next()){
 			int library_id = libraryFindresult.getInt(1);
