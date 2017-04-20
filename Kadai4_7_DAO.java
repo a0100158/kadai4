@@ -163,7 +163,7 @@ import java.util.List;
  	}
 
 
- 	public static List getUpdateTableData(String updateTargetTable){
+ 	public List getUpdateTableData(String updateTargetTable){
  		Connection con = null;
  		List updateTargetTableData = new ArrayList();
 
@@ -195,7 +195,7 @@ import java.util.List;
  	}
 
  	//		本テーブル値取得
- 	static List bookSelect() throws SQLException{
+ 	List bookSelect() throws SQLException{
  		List bookArrayList = new ArrayList();
  		Connection con = null;
  		con = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
@@ -219,7 +219,7 @@ import java.util.List;
  	}
 
  	//		図書館テーブル値取得
- 	static List librarySelect() throws SQLException{
+ 	List librarySelect() throws SQLException{
  		List libraryArrayList = new ArrayList();
  		Connection con = null;
  		con = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
@@ -237,7 +237,7 @@ import java.util.List;
  	}
 
  	// 図書館と本のひも付きテーブル値取得
- 	static List peggingSelect() throws SQLException{
+ 	List peggingSelect() throws SQLException{
  		List peggingArrayList = new ArrayList();
  		Connection con = null;
  		con = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
