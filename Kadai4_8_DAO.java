@@ -371,13 +371,13 @@ import java.util.List;
  	}
 
  	 //delete-----
- 		//本テーブルのpriceを削除
- 	 	public void sendDeleteBookValue(int intDeleteBookPrice) {
+ 		//本テーブルのレコードを削除
+ 	 	public void sendDeleteBookValue(int intDeleteTargetBookId) {
  	 		Connection con = null;
 
  	 		//データベースに接続
  	 		try {
- 	 			deleteBookPrice(intDeleteBookPrice);
+ 	 			deleteBookValue(intDeleteTargetBookId);
  	 		} catch (SQLException e) {
  	 			System.out.println("接続できませんでした。");
  	 		} finally {
@@ -391,23 +391,23 @@ import java.util.List;
  	 		}
  	 	}
 
- 	 	void deleteBookPrice(int intDeleteBookPrice)  throws SQLException{
+ 	 	void deleteBookValue(int intDeleteTargetBookId)  throws SQLException{
  	 		Connection con = null;
  	 		con = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
  	 		//本テーブルのSQL
  	 		String bookSql = "delete from book where id = ?";
  	 		PreparedStatement bookStatement =con.prepareStatement(bookSql);
- 			bookStatement.setInt(1,intDeleteBookPrice);
+ 			bookStatement.setInt(1,intDeleteTargetBookId);
  			bookStatement.executeUpdate();
  	 	}
 
- 		//図書館テーブルの図書館名を削除
+ 		//図書館テーブルのレコードを削除
  	 	public void sendDeleteLibraryValue(int intDeleteTargetLibrary_id) {
  	 		Connection con = null;
 
  	 		//データベースに接続
  	 		try {
- 	 			deleteLibrary_name(intDeleteTargetLibrary_id);
+ 	 			deleteLibraryValue(intDeleteTargetLibrary_id);
  	 		} catch (SQLException e) {
  	 			System.out.println("接続できませんでした。");
  	 		} finally {
@@ -421,7 +421,7 @@ import java.util.List;
  	 		}
  	 	}
 
- 	 	void deleteLibrary_name(int intDeleteTargetLibrary_id)  throws SQLException{
+ 	 	void deleteLibraryValue(int intDeleteTargetLibrary_id)  throws SQLException{
  	 		Connection con = null;
  	 		con = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
  	 		//図書館テーブルのSQL
@@ -431,13 +431,13 @@ import java.util.List;
  	 		libraryStatement.executeUpdate();
  	 	}
 
- 		//ひも付きテーブルのLibrary_idを削除
+ 		//ひも付きテーブルのレコードを削除
  	 	public void sendDeletePeggingValue(int intDeleteTargetPegging_id) {
  	 		Connection con = null;
 
  	 		//データベースに接続
  	 		try {
- 	 			deleteLibrary_id(intDeleteTargetPegging_id);
+ 	 			deletePeggingValue(intDeleteTargetPegging_id);
  	 		} catch (SQLException e) {
  	 			System.out.println("接続できませんでした。");
  	 		} finally {
@@ -451,7 +451,7 @@ import java.util.List;
  	 		}
  	 	}
 
- 	 	void deleteLibrary_id(int intDeleteTargetPegging_id)  throws SQLException{
+ 	 	void deletePeggingValue(int intDeleteTargetPegging_id)  throws SQLException{
  	 		Connection con = null;
  	 		con = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
  	 		//図書館テーブルのSQL
